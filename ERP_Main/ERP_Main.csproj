@@ -11,7 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\ERP_Comman\ERP_Common.csproj" />
+    <ProjectReference Include="..\ERP_Data\ERP_Data.csproj" />
+    <ProjectReference Include="..\ERP_Domain\ERP_Domain.csproj" />
+    <ProjectReference Include="..\ERP_Service\ERP_Service.csproj" />
   </ItemGroup>
 
 </Project>

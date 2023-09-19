@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using ERP_Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +12,7 @@ namespace ERP_Data
 {
     public class DapperService : IDapperService
     {
-        private static readonly string connString = "";
+        private static readonly string connString = ConfigItems.ConnectionString;
 
         public object DapperHelpers { get; private set; } = null!;
 
@@ -28,7 +29,7 @@ namespace ERP_Data
                            int? commandTimeout = null)
         {
 
-            using (IDbConnection _db = new SqlConnection(""))
+            using (IDbConnection _db = new SqlConnection(connString))
             {
                 return _db.ExecuteScalar(commandText,
                                         param: param,
@@ -45,7 +46,7 @@ namespace ERP_Data
                            bool IsSP = false)
         {
 
-            using (IDbConnection _db = new SqlConnection(""))
+            using (IDbConnection _db = new SqlConnection(connString))
             {
                 if (IsSP)
                 {
@@ -103,7 +104,7 @@ namespace ERP_Data
                                                     where T2 : class
         {
 
-            using (IDbConnection _db = new SqlConnection(""))
+            using (IDbConnection _db = new SqlConnection(connString))
             {
                 return _db.Query<T1, T2, T1>(storedProcedure,
                                     map: map,
@@ -147,7 +148,7 @@ namespace ERP_Data
                                                     where T2 : class
         {
 
-            using (IDbConnection _db = new SqlConnection(""))
+            using (IDbConnection _db = new SqlConnection(connString))
             {
                 return _db.Query<T1, T2, T1>(storedProcedure,
                                     (arg, t2) =>
@@ -176,7 +177,7 @@ namespace ERP_Data
                                                    where T3 : class
         {
 
-            using (IDbConnection _db = new SqlConnection(""))
+            using (IDbConnection _db = new SqlConnection(connString))
             {
                 return _db.Query<T1, T2, T3, T1>(storedProcedure,
                                     (arg, t2, t3) =>
@@ -207,7 +208,7 @@ namespace ERP_Data
                                                   where T4 : class
         {
 
-            using (IDbConnection _db = new SqlConnection(""))
+            using (IDbConnection _db = new SqlConnection(connString))
             {
                 return _db.Query<T1, T2, T3, T4, T1>(storedProcedure,
                                     (arg, t2, t3, t4) =>
@@ -240,7 +241,7 @@ namespace ERP_Data
                                                   where T5 : class
         {
 
-            using (IDbConnection _db = new SqlConnection(""))
+            using (IDbConnection _db = new SqlConnection(connString))
             {
                 return _db.Query<T1, T2, T3, T4, T5, T1>(storedProcedure,
                                     (arg, t2, t3, t4, t5) =>
@@ -275,7 +276,7 @@ namespace ERP_Data
                                                  where T6 : class
         {
 
-            using (IDbConnection _db = new SqlConnection(""))
+            using (IDbConnection _db = new SqlConnection(connString))
             {
                 return _db.Query<T1, T2, T3, T4, T5, T6, T1>(storedProcedure,
                                     (arg, t2, t3, t4, t5, t6) =>
@@ -312,7 +313,7 @@ namespace ERP_Data
                                                 where T7 : class
         {
 
-            using (IDbConnection _db = new SqlConnection(""))
+            using (IDbConnection _db = new SqlConnection(connString))
             {
                 return _db.Query<T1, T2, T3, T4, T5, T6, T7, T1>(storedProcedure,
                                     (arg, t2, t3, t4, t5, t6, t7) =>
