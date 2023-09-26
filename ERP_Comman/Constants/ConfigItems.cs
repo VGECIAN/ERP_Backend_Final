@@ -12,6 +12,6 @@ namespace ERP_Common
         public static IConfiguration Configuration { get; set; } = null!;
 
         public static string ConnectionString => Configuration["ConnectionStrings:DefaultConnection"] ?? "";
-        public static string GUIDKey => Configuration["Date:GUIDKey"] ?? "";
+        public static string GUIDKey => Configuration["Data:GUIDKey"] ?? "";
     }
 }

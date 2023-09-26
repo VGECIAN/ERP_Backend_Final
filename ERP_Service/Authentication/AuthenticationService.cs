@@ -20,10 +20,10 @@ namespace ERP_Service
             _dapperService = dapperService;
         }
 
-        public User? GetUserByEmail(string email, string password)
+        public User? GetUserByEmail(string UserName, string password)
         {
             DynamicParameters objdynamicParameters = new DynamicParameters();
-            objdynamicParameters.Add("Email", email);
+            objdynamicParameters.Add("UserName", UserName);
             objdynamicParameters.Add("Password", password);
             return _dapperService.QuerySP<User>(StoredProceduresNames.GetUserByEmail, objdynamicParameters).FirstOrDefault();
            
