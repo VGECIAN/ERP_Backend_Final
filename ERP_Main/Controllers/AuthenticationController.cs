@@ -1,4 +1,6 @@
-﻿using ERP_Data;
+﻿using DtyApi.Common;
+using ERP_Data;
+using ERP_Domain;
 using ERP_Main.Models;
 using ERP_Service;
 using Microsoft.AspNetCore.Http;
@@ -26,7 +28,8 @@ namespace ERP_Main.Controllers
             }
             try
             {
-                var User = _authenticationService.GetUserByEmail(model.Email, model.Password);
+                var encryptedPass = EncryptionDecryption.GetEncrypt(model.Password);
+                var User = _authenticationService.GetUserByEmail(model.UserName, encryptedPass);
                 if (User != null)
                 {
                     return ApiSuccess(ERPResponseStatusCode.Ok, "Success",User);
@@ -41,6 +44,12 @@ namespace ERP_Main.Controllers
                 return ApiException(ERPResponseStatusCode.ServerError, "Login", e);
             }
             
+        }
+
+        [HttpPost,Route("user/register",Name="Register")]
+        public BaseResponse Register(User model)
+        {
+            return ApiSuccess(ERPResponseStatusCode.Ok, "Success", "");
         }
     }
 }

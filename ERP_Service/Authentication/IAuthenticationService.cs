@@ -9,6 +9,6 @@ namespace ERP_Service
 {
     public interface IAuthenticationService
     {
-        User? GetUserByEmail(string email , string password); 
+        User? GetUserByEmail(string UserName , string password); 
     }
 }
