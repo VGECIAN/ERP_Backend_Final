@@ -29,10 +29,18 @@ namespace ERP_Main.Controllers
             try
             {
                 var encryptedPass = EncryptionDecryption.GetEncrypt(model.Password);
-                var User = _authenticationService.GetUserByEmail(model.UserName, encryptedPass);
-                if (User != null)
+                var user = _authenticationService.GetUserByEmail(model.UserName, encryptedPass);
+                if (user != null)
                 {
-                    return ApiSuccess(ERPResponseStatusCode.Ok, "Success",User);
+                    return ApiSuccess(ERPResponseStatusCode.Ok, "Success",new
+                    {
+                        user.Username,
+                        user.Name,
+                        user.UserId,
+                        user.RoleId,
+                        user.Email,
+                        user.PhoneNumber
+                    });
                 }
                 else
                 {
