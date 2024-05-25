@@ -1,5 +1,6 @@
 ﻿using ERP_Common;
 using ERP_Data;
+using ERP_Main.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -25,9 +26,9 @@ namespace ERP_Main.Controllers
             return modelErrors;
         }
 
-        protected BaseResponse ApiMessage(ERPResponseStatusCode statusCode, string message, object? data = null, bool isSuccessfull = false)
+        protected BaseResponseVM ApiMessage(ERPResponseStatusCode statusCode, string message, object? data = null, bool isSuccessfull = false)
         {
-            var response = new BaseResponse()
+            var response = new BaseResponseVM()
             {
                 StatusCode = statusCode,
                 StatusMessage = GetStatusCodeString(statusCode),
@@ -38,9 +39,9 @@ namespace ERP_Main.Controllers
             return response;
         }
 
-        protected BaseResponse ApiSuccess(ERPResponseStatusCode statusCode, string message, object? data = null)
+        protected BaseResponseVM ApiSuccess(ERPResponseStatusCode statusCode, string message, object? data = null)
         {
-            var response = new BaseResponse()
+            var response = new BaseResponseVM()
             {
                 IsSuccessfull = true,
                 StatusCode = statusCode,
@@ -52,12 +53,12 @@ namespace ERP_Main.Controllers
             return response;
         }
 
-        protected BaseResponse ApiException(ERPResponseStatusCode statusCode, string exceptionIn, Exception ex, string? message = null)
+        protected BaseResponseVM ApiException(ERPResponseStatusCode statusCode, string exceptionIn, Exception ex, string? message = null)
         {
             //var _logger = EngineContext.Resolve<ILogger<BaseController>>();
             //_logger.LogError($"Exception in {exceptionIn}", ex);
 
-            var response = new BaseResponse()
+            var response = new BaseResponseVM()
             {
                 IsSuccessfull = false,
                 StatusCode = statusCode,

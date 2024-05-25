@@ -1,5 +1,4 @@
 using ERP_Common;
-using ERP_Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +10,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 ConfigItems.Configuration = builder.Configuration;
-ServiceRegistry.RegisterServices(builder.Services);
 
 var app = builder.Build();
 
