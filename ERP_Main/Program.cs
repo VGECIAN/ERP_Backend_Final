@@ -1,6 +1,4 @@
 using ERP_Common;
-using ERP_Service;
-using FluentAssertions.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +19,6 @@ builder.Services.AddCors(options =>
 });
 
 ConfigItems.Configuration = builder.Configuration;
-ServiceRegistry.RegisterServices(builder.Services);
 
 var app = builder.Build();
 
