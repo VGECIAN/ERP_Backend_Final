@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ERP_Data
+namespace ERP_Domain
 {
-    public partial class ProductCategory
+    [Table("product_category")]
+    public class ProductCategory
     {
-        public int CategoryId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long CategoryId { get; set; }
         public string Name { get; set; } = null!;
         public string? HsnCode { get; set; }
         public double TaxPercentage { get; set; }
@@ -13,5 +18,7 @@ namespace ERP_Data
         public DateTime? UpdatedDate { get; set; }
         public string CreatedBy { get; set; } = null!;
         public string UpdatedBy { get; set; } = null!;
+
+        public ICollection<Product> Products { get; set; }
     }
 }

@@ -77,5 +77,38 @@ namespace ERP_Comman
             return "";
         }
 
+        /// <summary>
+        /// Enum for Unit of Measure
+        /// </summary>
+        public enum UOM
+        {
+            NOS,
+            KG,
+            LIT
+        }
+
+        /// <summary>
+        /// Enum for Product Type
+        /// </summary>
+        public enum ProductType
+        {
+            RAW_MATERIAL,
+            SEMI_FINISHED_GOOD,
+            FINISHED_GOOD
+        }
+
+        /// <summary>
+        /// Enum for Inventory status
+        /// </summary>
+        public enum InventoryStatus
+        {
+            REQUIREMENT_GENERATED,
+            PURCHASE_ORDER_GENERATED,
+            IN_PRODUCTION,
+            READY_TO_DELIVER,
+            DELIVERED,
+            BOOKED_FOR_PRODUCTION,
+            IN_INVENTORY
+        }
     }
 }
