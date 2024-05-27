@@ -1,5 +1,6 @@
 using ERP_Common;
 using ERP_Domain;
+using ERP_Main.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,7 @@ builder.Services.AddCors(options =>
 ConfigItems.Configuration = builder.Configuration;
 
 builder.Services.AddEntityFrameworkNpgsql().AddDbContext<ERPDbContext>(opt => opt.UseNpgsql(ConfigItems.ConnectionString));
+builder.Services.AddProjectServices();
 
 var app = builder.Build();
 
