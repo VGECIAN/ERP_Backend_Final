@@ -4,60 +4,57 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ERP_Data.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        public ERPDbContext _db;
-        public DbSet<T> dbSet;
+        private readonly ERPDbContext _db;
+        private readonly DbSet<T> _dbSet;
 
-        public Repository(ERPDbContext db, DbSet<T> dbSet)
+        public Repository(ERPDbContext db)
         {
             _db = db;
-            this.dbSet = dbSet;
+            _dbSet = _db.Set<T>();
         }
 
         public void Add(T entity)
         {
-            dbSet.Add(entity);
+            _dbSet.Add(entity);
         }
 
         public IEnumerable<T> GetAll()
         {
-            IQueryable<T> query = dbSet;
+            IQueryable<T> query = _dbSet;
             return query.ToList();
         }
 
         public T GetFirstOrDefault(Expression<Func<T, bool>> filter)
         {
-            IQueryable<T> query = dbSet;
-            query = query.Where(filter);
-
+            IQueryable<T> query = _dbSet.Where(filter);
             return query.FirstOrDefault();
         }
 
         public void Remove(T entity)
         {
-            dbSet.Remove(entity);
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
+        }
+
+
+        public bool Any(Expression<Func<T, bool>> filter)
+        {
+            IQueryable<T> query = _dbSet;
+            return query.Any(filter);
+        }
+
+        public void Save()
+        {
+            _db.SaveChanges();
         }
 
         public void RemoveRange(T entity)
         {
-            dbSet.RemoveRange(entity);
-        }
-
-        bool IRepository<T>.Any(Expression<Func<T, bool>> filter)
-        {
-            IQueryable<T> query = dbSet;
-            return query.Any(filter);
-        }
-        public void Save()
-        {
-            _db.SaveChanges();
+            _dbSet.RemoveRange(entity);
         }
     }
 }
